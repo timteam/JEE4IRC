@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 	xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+		<link rel="stylesheet" type="text/css" href="mystyle.css"/>
+</h:head>
+<h:body>
+	<h:header>
+		<h1>Generic Header</h1>
+		<h2><ui:insert name="sectionTitle"> Default Section Title</ui:insert> </h2>
+		<div class="nav">
+		<ul>
+			<li>Section 1</li>
+			<li>Section 2</li>
+			<li>Section 3</li>
+			<li>Section 4</li>
+			<ui:insert name="nav"> <li>Custom Section</li> </ui:insert>
+		</ul>
+	</div>
+	</h:header>
+	
+	
+	
+	
+	
+	<div class="corebody">
+		<ui:insert name="body"> Default Section Content</ui:insert>
+	</div>
+	
+	
+	
+	
+<h:footer> 
+	<div> Copyright&copy; 2016 cookme.fr</div>	
+	<div> Cookme</div>	
+</h:footer>
+
+</h:body>
+
+</html>
