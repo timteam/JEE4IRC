@@ -1,0 +1,22 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:ui="http://java.sun.com/jsf/facelets"
+				template="MyTemplate.xhtml">
+<ui:define name="sectionTitle">
+	My instantiated Title
+</ui:define>
+	<ui:define name="body">
+		<h3> Instantiated body</h3>
+		<p> This is an added paragraph</p>
+		<h:form>
+			<h:inputText id="username" value="enter a value" required="true"></h:inputText>
+			<h:commandButton  value="OK"></h:commandButton>
+		</h:form>
+	</ui:define>
+
+	<ui:define name="nav">
+		<li class="added">Instance 1</li>
+		<li class="added">Instance 2</li>
+	</ui:define>
+	
+</ui:composition>

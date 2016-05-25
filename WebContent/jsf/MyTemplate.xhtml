@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 	xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+		<link rel="stylesheet" type="text/css" href="mystyle.css"/>
+</h:head>
+<h:body>
+	<div class="header">
+		<h1>Generic Header</h1>
+		<h2><ui:insert name="sectionTitle"> Default Section Title</ui:insert> </h2>
+	</div>
+	<div class="nav">
+		<ul>
+			<li>Section 1</li>
+			<li>Section 2</li>
+			<li>Section 3</li>
+			<li>Section 4</li>
+			<ui:insert name="nav"> <li>Custom Section</li> </ui:insert>
+		</ul>
+	</div>
+	<div class="corebody">
+		<ui:insert name="body"> Default Section Content</ui:insert>
+	</div>
+	
+	<div class="footer">
+		<h6>Copyright 2048</h6>
+	</div>
+</h:body>
+
+</html>

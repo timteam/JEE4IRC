@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+
+	<h1>List of Models</h1>
+	<p:dataGrid var="car" value="#{carBean.cars}" columns="3" rows="12">
+		<p:column>
+			<p:panel header="#{car.model}">
+				<h:panelGrid columns="1">
+					<p:graphicImage value="../images/users/#{car.manufacturer}.png" />
+					<h:outputText value="#{car.year}" />
+				</h:panelGrid>
+			</p:panel>
+		</p:column>
+	</p:dataGrid>
+
+
+	<h1>List Of Users</h1>
+	<p:dataGrid var="usertmp" value="#{userList.users}" columns="3" rows="12">
+		<p:column>
+			<p:panel header="#{usertmp.name}">
+				<h:panelGrid columns="1">
+					<p:graphicImage value="../images/users/#{usertmp.pictureNumber}.png" />
+					<h:outputText value="#{usertmp.email}" />
+				</h:panelGrid>
+			</p:panel>
+		</p:column>
+	</p:dataGrid>
+</h:body>
+</html>

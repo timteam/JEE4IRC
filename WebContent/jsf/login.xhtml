@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 	xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core">
+		
+<h:head>
+</h:head>
+<body>
+	<h1>Login Page</h1>
+	<h:form>
+		<table border="0"> 
+			<tr>
+				<td> Your Login</td> 
+				<td> 
+					<h:inputText id="username" value="#{user.name}" required="true">
+						<f:validator validatorId="validators.username" />
+					</h:inputText>
+				</td>
+				<td> <h:message for="username" showDetail="true" style="color:red"/></td>	
+			</tr>
+			
+			<tr>
+				<td> Your Password</td> <td> <h:inputSecret value="#{user.pwd}"/></td>
+			</tr>
+			<tr>
+				<td> </td> <td> <h:commandButton  value="OK"/></td>
+			</tr>
+		</table>
+	</h:form>
+</body>
+
+</html>

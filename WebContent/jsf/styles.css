@@ -1,0 +1,16 @@
+.table-style{
+	border:solid;
+}
+
+.heading-style{
+	background-color: black;
+	color: white;
+}
+
+.rowA{
+	background-color: white;
+}
+
+.rowB{
+	background-color: #689AFF;
+}

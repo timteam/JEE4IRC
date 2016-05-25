@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+ 
+<h:head>
+</h:head>
+<h:body>
+<h1>Advanced List of Users</h1>
+	<h:form id="form">  
+    <p:dataGrid var="usertmp" value="#{userList.users}" columns="3"  
+        rows="12" paginator="true"  
+        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+        rowsPerPageTemplate="9,12,15">  
+  
+        <p:panel header="#{usertmp.name}" style="text-align:center">  
+            <h:panelGrid columns="1" style="width:100%">  
+                 <p:graphicImage value="/images/users/#{usertmp.pictureNumber}.png"/>    
+  
+                <h:outputText value="#{usertmp.email}" />  
+  
+                <p:commandLink update=":form:userDetail" oncomplete="userDialog.show()" title="View Detail">  
+                    <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />   
+                    <f:setPropertyActionListener value="#{usertmp}"   
+                            target="#{userList.selectedUser}" />  
+                </p:commandLink>  
+            </h:panelGrid>  
+        </p:panel>  
+  
+    </p:dataGrid>  
+      
+    <p:dialog header="User Detail" widgetVar="userDialog" modal="true">  
+        <p:outputPanel id="userDetail" style="text-align:center;" layout="block">  
+          
+            <p:graphicImage value="/images/users/#{userList.selectedUser.pictureNumber}.png"/>  
+              
+            <h:panelGrid  columns="2" cellpadding="5">  
+                <h:outputLabel for="modelNo" value="User age: " />  
+                <h:outputText id="modelNo" value="#{userList.selectedUser.age}" />  
+                  
+                <h:outputLabel for="email" value="Email: " />  
+                <h:outputText id="email" value="#{userList.selectedUser.email}" />  
+                  
+                <h:outputLabel for="pwd" value="Pwd: " />  
+                <h:outputText id="pwd" value="#{userList.selectedUser.pwd}" />  
+            </h:panelGrid>  
+        </p:outputPanel>  
+    </p:dialog>  
+  
+</h:form>   
+</h:body>
+</html>

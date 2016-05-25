@@ -1,0 +1,25 @@
+div.header{
+	background-color: black;
+	color: white;
+}
+
+div.nav{
+	float:left;
+	background-color: black;
+	color: white;
+	padding: 15px;
+}
+
+div.corebody{
+	margin-left: 30px;
+	text-align: center;
+}
+div.footer{
+	clear:both;
+	width:100%;
+	text-align: center;
+}
+
+li.added{
+	color:yellow;
+}
