@@ -79,6 +79,7 @@ html, body {
 /* Not required for template or sticky footer method. */
 .container {
 	width: auto;
+/* 	background-color: red; */
 	/*         max-width: 680px; */
 }
 

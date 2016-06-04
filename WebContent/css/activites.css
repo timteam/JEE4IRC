@@ -1,0 +1,22 @@
+@CHARSET "US-ASCII";
+
+#bouton_emergency {
+	width: 100%;
+}
+
+#bouton_recipes {
+	width: 100%;
+}
+
+#bouton_shop {
+	width: 100%;
+}
+
+.container{
+	height: 100%;
+}
+
+.vertical-align {
+    display: flex;
+    align-items: center;
+}
