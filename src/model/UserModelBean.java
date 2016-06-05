@@ -1,27 +1,43 @@
 package model;
 
-public class UserModelBean {
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import java.io.Serializable;
+import java.util.Date;
+
+@ManagedBean
+@SessionScoped
+public class UserModelBean implements Serializable {
 
 	private String lastname;
 	private String surname;
-	private int age;
+	private String email;
 	private String login;
 	private String pwd;
-	
-	public UserModelBean(){
-		
-	}
-	
-	public UserModelBean(String lastname, String surname, 
-			String login, int age, String pwd) {
-		super();
+	private Date lastConnection;
+	private int age;
+
+	public UserModelBean(){}
+
+	public UserModelBean(String surname, String lastname, String email, String login, String pwd, int age) {
 		this.lastname = lastname;
 		this.surname = surname;
-		this.age = age;
+		this.email = email;
 		this.login = login;
 		this.pwd = pwd;
+		this.age = age;
 	}
-	
+
+	public UserModelBean(String surname, String lastname, String email, String login, String pwd, int age, Date lastConnection) {
+		this.lastname = lastname;
+		this.surname = surname;
+		this.email = email;
+		this.login = login;
+		this.pwd = pwd;
+		this.age = age;
+		this.lastConnection = lastConnection;
+	}
+
 	public String getLastname() {
 		return lastname;
 	}
@@ -61,10 +77,26 @@ public class UserModelBean {
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
-	
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Date getLastConnection() {
+		return lastConnection;
+	}
+
+	public void setLastConnection(Date lastConnection) {
+		this.lastConnection = lastConnection;
+	}
+
 	@Override
 	public String toString() {
-		return"[SURNAME]:"+this.getSurname()+",[LASTNAME]:"+this.getLastname()+",[AGE]:"+this.getAge()+",[LOGIN]:"+this.getLogin()+",[PWD]:"+this.getPwd();
+		return"[SURNAME]:"+this.getSurname()+",[LASTNAME]:"+this.getLastname()+",[AGE]:"+this.getAge()+"[EMAIL] : "+this.getEmail()+",[LOGIN]:"+this.getLogin()+",[PWD]:"+this.getPwd();
 	}
 
 }

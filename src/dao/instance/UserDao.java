@@ -1,11 +1,13 @@
 package dao.instance;
 
-import java.sql.Connection;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
+import dao.fabric.DaoFabric;
 import model.UserModelBean;
-import model.UserSubmissionModelBean;
+
+
 
 public class UserDao {
 	private Connection connection;
@@ -15,122 +17,142 @@ public class UserDao {
 	private String dB_USER;
 	private String dB_PWD;
 
-	public UserDao(String DB_HOST, String DB_PORT, String DB_NAME,
-			String DB_USER, String DB_PWD) {
-		dB_HOST = DB_HOST;
-		dB_PORT = DB_PORT;
-		dB_NAME = DB_NAME;
-		dB_USER = DB_USER;
-		dB_PWD = DB_PWD;
+	public UserDao(String DB_HOST,String DB_PORT, String DB_NAME,String DB_USER,String DB_PWD) {
+		dB_HOST= DB_HOST;
+		dB_PORT= DB_PORT;
+		dB_NAME= DB_NAME;
+		dB_USER= DB_USER;
+		dB_PWD= DB_PWD;
 	}
 
 	public void addUser(UserModelBean user) {
-		// Création de la requête
-		java.sql.PreparedStatement query;
-		try {
+		//Création de la requête
+		PreparedStatement query;
+		try{
 			// create connection
-			connection = java.sql.DriverManager.getConnection("jdbc:mysql://"
-					+ dB_HOST + ":" + dB_PORT + "/" + dB_NAME, dB_USER, dB_PWD);
-			query = connection
-					.prepareStatement("Insert into UserModel (lastname,surname,login,age,pwd) values (?,?,?,?,?)");
-			query.setString(1, user.getLastname());
-			query.setString(2, user.getSurname());
-			query.setString(3, user.getLogin());
-			query.setInt(4, user.getAge());
+			connection= connect();
+			String sql="INSERT INTO user(surname, lastname, email, login, pwd, age) VALUES(?, ?, ?, ?, ?, ?)";
+			query =  connection.prepareStatement(sql);
+			query.setString(1, user.getSurname());
+			query.setString(2, user.getLastname());
+			query.setString(3,user.getEmail());
+			query.setString(4, user.getLogin());
 			query.setString(5, user.getPwd());
-
+			query.setInt(6, user.getAge());
 			query.executeUpdate();
-			// close
+			//connection.commit();
+			query.close();
+			//connection.close();
 			connection.close();
-
-		} catch (SQLException e) {
+		}catch(SQLException e) {
 			e.printStackTrace();
 		}
+
 	}
 
-	public ArrayList<UserModelBean> getAllUser() {
-		// return value
-		ArrayList<UserModelBean> userList = new ArrayList<UserModelBean>();
-		java.sql.Statement query;
-		try {
+	public List<UserModelBean> getAllUser(){
+		//return value
+		List<UserModelBean> userList=new ArrayList<>();
+		Statement query;
+		try{
 			// create connection
-			connection = java.sql.DriverManager.getConnection("jdbc:mysql://"
-					+ dB_HOST + ":" + dB_PORT + "/" + dB_NAME, dB_USER, dB_PWD);
-			// TODOA l’image de DB.java créer une réquète permettant de
-			// récupérer l’ensemble des utilisateurs contenu dans la base et de
-			// les placer dans uneliste
-			query = connection.createStatement();
-			// Executer puis parcourir les résultats
-			java.sql.ResultSet rs = query.executeQuery("SELECT * FROM UserModel");
-
-			while (rs.next()) {
-				userList.add(new UserModelBean(rs.getString("lastname"), rs
-						.getString("surname"), rs.getString("login"), rs
-						.getInt("age"), rs.getString("pwd")));
+			connection= connect();
+			query =  connection.createStatement();
+			String sql="SELECT surname, lastname, login, email, pwd, age FROM user";
+			ResultSet result = query.executeQuery(sql);
+			while(result.next()){
+				userList.add(new UserModelBean(result.getString("surname"), result.getString("lastname"),result.getString("email"), result.getString("login"), result.getString("pwd"),result.getInt("age")));
 			}
+			query.close();
 			connection.close();
-		} catch (SQLException e) {
+		}catch(SQLException e) {
 			e.printStackTrace();
 		}
 		return userList;
 	}
 
 	public UserModelBean checkUser(String login, String pwd) {
-		java.sql.PreparedStatement query;
-		UserModelBean userbean = null;
-		try {
+		PreparedStatement preparedStatement;
+		UserModelBean userCheck =null;
+		try{
 			// create connection
-			connection = java.sql.DriverManager.getConnection("jdbc:mysql://"
-					+ dB_HOST + ":" + dB_PORT + "/" + dB_NAME, dB_USER, dB_PWD);
-			// TODOA l’image de DB.java créer une réquète permettant de
-			// récupérer l’ensemble des utilisateurs contenu dans la base et de
-			// les placer dans uneliste
-			query = connection
-					.prepareStatement("SELECT * FROM UserModel where UPPER(login) = UPPER(?) And pwd = ?");
-			query.setString(1, login);
-			query.setString(2, pwd);
+			connection= connect();
+			String sql="SELECT * FROM user where login = ? and pwd = ?";
+			preparedStatement =  connection.prepareStatement(sql);
+			preparedStatement.setString(1, login);
+			preparedStatement.setString(2, pwd);
 
-			// Executer puis parcourir les résultats
-			java.sql.ResultSet rs = query.executeQuery();
+			ResultSet result = preparedStatement.executeQuery();
 
-			while (rs.next()) {
-				userbean = new UserModelBean(rs.getString("lastname"),
-						rs.getString("surname"), rs.getString("login"),
-						rs.getInt("age"), rs.getString("pwd"));
+			if(result.next()){
+				userCheck = new UserModelBean(result.getString("lastname"), result.getString("surname"),result.getString("email"), result.getString("login"), result.getString("pwd"),result.getInt("age"));
 			}
+			preparedStatement.close();
 			connection.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return userCheck;
+	}
+
+	public UserModelBean checkAdminUser(String login, String pwd) {
+		PreparedStatement preparedStatement;
+		UserModelBean userCheck =null;
+		try{
+			// create connection
+			connection= connect();
+			String sql="SELECT * FROM user where login = ? and pwd = ? and isAdmin = 1";
+			preparedStatement =  connection.prepareStatement(sql);
+			preparedStatement.setString(1, login);
+			preparedStatement.setString(2, pwd);
+
+			ResultSet result = preparedStatement.executeQuery();
+
+			if(result.next()){
+				userCheck = new UserModelBean(result.getString("lastname"), result.getString("surname"),result.getString("email"), result.getString("login"), result.getString("pwd"),result.getInt("age"), result.getDate("lastConnection"));
+			}
+			preparedStatement.close();
+			connection.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return userCheck;
+	}
+
+	private Connection connect(){
+		Connection connection = null;
+		try {
+			connection = DriverManager.getConnection("jdbc:mysql://"+dB_HOST+":"+dB_PORT+"/"+dB_NAME,dB_USER, dB_PWD);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return userbean;
+		return connection;
 	}
 
-	public boolean userExists(UserSubmissionModelBean userSubmitted) {
+	public static void main(String[] main){
+		UserModelBean userToAdd 	= new UserModelBean("Charly","Berthet","charly.berthet@cpe.fr","charly","test",23);
+		UserModelBean userToCheck 	= new UserModelBean("benjamin","grenier","benji2092@hotmail.fr","benji2092","test",24);
 
-		java.sql.PreparedStatement query;
-		boolean exists = false;
-		try {
-			// create connection
-			connection = java.sql.DriverManager.getConnection("jdbc:mysql://"
-					+ dB_HOST + ":" + dB_PORT + "/" + dB_NAME, dB_USER, dB_PWD);
-			// TODOA l’image de DB.java créer une réquète permettant de
-			// récupérer l’ensemble des utilisateurs contenu dans la base et de
-			// les placer dans uneliste
-			query = connection
-					.prepareStatement("SELECT * FROM UserModel where UPPER(login) = UPPER(?)");
-			query.setString(1, userSubmitted.getLogin());
+		UserDao userDao = DaoFabric.getInstance().createUserDao();
 
-			// Executer puis parcourir les résultats
-			java.sql.ResultSet rs = query.executeQuery();
+		//Subscription
+		//userDao.addUser(userToAdd);
+		UserModelBean userCheck = userDao.checkUser(userToCheck.getLogin(),userToCheck.getPwd());
+		//Check user
+		if(userCheck != null){
+			System.out.println("user inscrit : "+userCheck.toString());
 
-			if (rs.next()) {
-				exists = true;
-			}
-			connection.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		}else{
+			System.out.println("user non inscrit");
 		}
-		return exists;
-	}
 
+		//Get All user
+		System.out.println("------------ Affichage des user en base --------------");
+		for(UserModelBean user :userDao.getAllUser()){
+			System.out.println(user.toString());
+		}
+
+	}
 }
+
+

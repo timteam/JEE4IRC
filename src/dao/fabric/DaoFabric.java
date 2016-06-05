@@ -1,6 +1,6 @@
 package dao.fabric;
 
-
+import dao.instance.CommentDao;
 import dao.instance.RecipesDao;
 import dao.instance.UserDao;
 
@@ -11,11 +11,11 @@ public final class DaoFabric {
 	// De Java version 1.2 à 1.4, il est possible d'utiliser la classe
 	// ThreadLocal.
 	private static volatile DaoFabric instance=null;
-	private static final String DB_HOST = "db-tp.cpe.fr";
-	private static final String DB_PORT="3306";
-	private static final String DB_NAME="binome08";
-	private static final String DB_USER="binome08";
-	private static final String DB_PWD="binome08";
+	private static final String DB_HOST = "master.granetlucas.fr";
+	private static final String DB_PORT="80";
+	private static final String DB_NAME="cookbcf";
+	private static final String DB_USER="cookbcf";
+	private static final String DB_PWD="cookbcfpw";
 	private DaoFabric() {
 		super();
 		try{
@@ -32,7 +32,7 @@ public final class DaoFabric {
 	 */
 	
 	public final static DaoFabric getInstance() {
-		//Le "Double-CheckedSingleton"/"Singleton doublement vérifié" permet
+		//Le "Double-CheckedSingleton"/"Singletondoublementvérifié" permet
 		// d'éviter un appel coûteux à synchronized,
 		//une fois que l'instanciation est faite.
 		if(DaoFabric.instance==null) {
@@ -53,9 +53,25 @@ public final class DaoFabric {
 		return userDao;
 		
 	}
-	
+
 	public RecipesDao createRecipesDao(){
 		RecipesDao receipesDao =new RecipesDao(this.DB_HOST,this.DB_PORT,this.DB_NAME,this.DB_USER,this.DB_PWD);
 		return receipesDao;
 	}
+
+	public CommentDao createCommentDao(){
+		CommentDao dao =new CommentDao(this.DB_HOST,this.DB_PORT,this.DB_NAME,this.DB_USER,this.DB_PWD);
+		return dao;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+

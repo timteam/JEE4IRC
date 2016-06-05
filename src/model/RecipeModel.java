@@ -1,12 +1,17 @@
 package model;
 
-public class RecipeModelBean {
+import java.io.Serializable;
+import java.io.StringReader;
+
+public class RecipeModel implements Serializable{
 	private String title;
 	private String description;
 	private int expertise;
 	private int nbpeople;
 	private int duration;
 	private String type;
+	
+	
 	public String getTitle() {
 		return title;
 	}
@@ -31,11 +36,15 @@ public class RecipeModelBean {
 	public void setNbpeople(int nbpeople) {
 		this.nbpeople = nbpeople;
 	}
-	public int getDuration() {
+	public String getDuration() {
+		return String.format("%02d",duration/60) + ":" + String.format("%02d",duration%60);
+	}
+	public int getDurationInt() {
 		return duration;
 	}
-	public void setDuration(int duration) {
-		this.duration = duration;
+	public void setDuration(String duration) {
+		String[] durations = duration.split(":");
+		this.duration = Integer.valueOf(durations[0])*60+ Integer.valueOf(durations[1]);
 	}
 	public String getType() {
 		return type;
@@ -43,9 +52,8 @@ public class RecipeModelBean {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public RecipeModelBean(){}
-	public RecipeModelBean(String title, String description, int expertise,
-			int nbpeople, int duration, String type) {
+	public RecipeModel(){}
+	public RecipeModel(String title, String description, int expertise,int nbpeople, int duration, String type) {
 		super();
 		this.title = title;
 		this.description = description;
@@ -54,16 +62,11 @@ public class RecipeModelBean {
 		this.duration = duration;
 		this.type = type;
 	}
-	@Override
-	public String toString() {
-		return "RecipeModelBean [title=" + title + ", description="
-				+ description + ", expertise=" + expertise + ", nbpeople="
-				+ nbpeople + ", duration=" + duration + ", type=" + type + "]";
+	
+	
+	public String toString(){
+		return"[TITLE]:"+this.getTitle()+",[DESCRIPTION]:"+this.getDescription()
+				+",[EXPERTISE]:"+this.getExpertise()+",[NBPEOPLE]:"+this.getNbpeople()
+				+",[DURATION]:"+this.getDuration()+",[TYPE]:"+this.getType();
 	}
-	
-	
-	
-	
-	
-	
 }
