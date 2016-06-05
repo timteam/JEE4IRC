@@ -9,7 +9,7 @@
 	bottom: 0;
 	right: 0;
 	overflow: hidden;
-	background: url("../pics/cook-book-background.jpg") no-repeat center center fixed;
+	background: url("#{resource['pics/cook-book-background.jpg']}") no-repeat center center fixed;
 	  -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

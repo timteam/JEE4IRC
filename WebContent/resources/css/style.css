@@ -5,7 +5,11 @@ header {
 	padding: 0px 0px 0px 0px;
 	float: left;
 	width: 100%;
-	background-color: blue;
+	background: url("#{resource['pics/cook-book-background.jpg']}") no-repeat center center fixed;
+	  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 #footer-logo {
@@ -14,33 +18,33 @@ header {
 }
 
 #footer {
-	background-color: orange;
-/* 	background-color: #f5f5f5; */
+	background-color: #449d44;
 }
 
 #page-title {
-	background-color: red;
+	height: 70px;
+/* 	background-color: red; */
 }
 
-#session-flashbag-message {
-	background-color: violet;
-}
+/* #session-flashbag-message { */
+/* 	background-color: violet; */
+/* } */
 
-#become-member {
-	background-color: yellow;
-}
+/* #become-member { */
+/* 	background-color: yellow; */
+/* } */
 
-#page-session-manager {
-	background-color: green;
-}
+/* #page-session-manager { */
+/* 	background-color: green; */
+/* } */
 
-#login-form {
-	background-color: lime;
-}
+/* #login-form { */
+/* 	background-color: lime; */
+/* } */
 
-#main-content {
-	background-color: grey;
-}
+/* #main-content { */
+/* 	background-color: grey; */
+/* } */
 
 /* Sticky footer styles
       -------------------------------------------------- */

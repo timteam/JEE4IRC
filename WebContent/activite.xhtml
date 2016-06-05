@@ -8,18 +8,19 @@ transitional.dtd">
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link rel="stylesheet" type="text/css" href="css/activites.css" />
 	<title>Insert title here</title>
-	<link rel="stylesheet" type="text/css" href="css/style.css" />
-	<link href="css/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+	<h:outputStylesheet name="css/style.css" />
+	<h:outputStylesheet name="css/activites.css" />
+	<h:outputStylesheet name="css/bootstrap/css/bootstrap.min.css" />
 </h:head>
 <h:body>
 	<div id="wrap">
 		<div class="container">
 			<div class="row vertical-align">
 				<div class=" col-md-4 vertical-align">
-					<a id="bouton_emergency" href="emergency.xhtml"
-						class="btn btn-warning btn-lg" role="button">Emergency</a>
+					<h:link id="bouton_emergency" value="Emergency"
+						outcome="emergency.xhtml" class="btn btn-warning btn-lg"
+						role="button" />
 				</div>
 
 				<div class=" col-md-4 vcenter">
@@ -41,16 +42,20 @@ transitional.dtd">
 			<div class="row">
 				<div id="footer-copyright" class="col-md-4">Copyright&copy;
 					2016 cookme.fr</div>
-				<img src="pics/LogoCMG2.jpg" alt="CookMe" id="footer-logo"
-					class="col-md-4 col-md-offset-4" />
+				<h:graphicImage library="pics" name="LogoCMG2.jpg" alt="CookMe"
+					id="footer-logo" class="col-md-4 col-md-offset-4" />
+
+
 			</div>
 
 		</div>
 
 	</div>
+
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-	<script src="css/bootstrap/js/bootstrap.min.js"></script>
+	<h:outputScript name="js/bootstrap/js/bootstrap.min.js" />
+
 </h:body>
 <!-- <footer>  -->
 <!-- 	<div> Copyright&copy; 2016 cookme.fr</div>	 -->
