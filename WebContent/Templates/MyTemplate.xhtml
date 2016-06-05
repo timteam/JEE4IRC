@@ -5,6 +5,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
+	<title><ui:insert name="insert-page-tab-title">CookMe</ui:insert></title>
 	<h:outputStylesheet name="css/style.css" />
 	<h:outputStylesheet name="css/bootstrap/css/bootstrap.min.css" />
 	<ui:insert name="insert-page-style"></ui:insert>
@@ -18,7 +19,7 @@
 
 				<!-- bloc titre de l'activité avec couleur de fond changeant en fonction de l'activité -->
 				<div id="page-title" class="col-md-3">
-					<ui:insert name="insert-section-title">Default Title</ui:insert>
+					<p class="text-center"><ui:insert name="insert-section-title">Default Title</ui:insert></p>
 				</div>
 
 				<!-- bloc de message de succès ou d'erreur à la connexion -->
@@ -67,10 +68,7 @@
 		<div id="main-content" class="container">
 
 			<ui:insert name="inser-body">
-				<ul>
-					<li>aaaTemplate content</li>
-					<li>Template content</li>
-				</ul>
+				<h1>aaaTemplate content</h1>
 			</ui:insert>
 		</div>
 		<!-- 		</div> -->

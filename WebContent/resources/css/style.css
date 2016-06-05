@@ -23,28 +23,13 @@ header {
 
 #page-title {
 	height: 70px;
-/* 	background-color: red; */
+	background-color: rgba(100,100,100,0.6);
+	border-radius: 0px 0px 10px 10px;
 }
-
-/* #session-flashbag-message { */
-/* 	background-color: violet; */
-/* } */
-
-/* #become-member { */
-/* 	background-color: yellow; */
-/* } */
-
-/* #page-session-manager { */
-/* 	background-color: green; */
-/* } */
-
-/* #login-form { */
-/* 	background-color: lime; */
-/* } */
-
-/* #main-content { */
-/* 	background-color: grey; */
-/* } */
+#page-title p{
+	color: white;
+	font-size: 3em;	
+}
 
 /* Sticky footer styles
       -------------------------------------------------- */
