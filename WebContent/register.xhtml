@@ -27,26 +27,26 @@ transitional.dtd">
 					<p:messages autoUpdate="true" />
 
 					<h:panelGrid id="grid" columns="3" cellpadding="5">
-						<h:outputLabel for="surname" value="Surname:"
+						<h:outputLabel for="surname" value="FirstName:"
 							style="font-weight:bold" />
 						<p:inputText id="surname"
-							value="#{userSubmissionModelBean.surname}" required="true"
+							value="#{userRegisterModelBean.surname}" required="true"
 							validatorMessage="Entrez que des lettres">
-							<f:validateRegex pattern="[a-zA-Z]+" />
+							<f:validateRegex pattern="[A-zÀ-ÿ]+" />
 						</p:inputText>
 						<p:message for="surname" />
 						<h:outputLabel for="lastname" value="Lastname:"
 							style="font-weight:bold" />
 						<p:inputText id="lastname"
-							value="#{userSubmissionModelBean.lastname}" required="true"
+							value="#{userRegisterModelBean.lastname}" required="true"
 							validatorMessage="Caractere autorisé :[a-z A-Z]">
-							<f:validateRegex pattern="[a-zA-Z]+" />
+							<f:validateRegex pattern="[A-zÀ-ÿ]+" />
 						</p:inputText>
 						<p:message for="lastname" />
 
 
 						<h:outputLabel for="age" value="Age:" style="font-weight:bold" />
-						<p:inputText id="age" value="#{userSubmissionModelBean.age}"
+						<p:inputText id="age" value="#{userRegisterModelBean.age}"
 							required="true" label="Age">
 							<f:validateDoubleRange minimum="0" maximum="99" />
 						</p:inputText>
@@ -55,7 +55,7 @@ transitional.dtd">
 
 						<h:outputLabel for="email" value="Email Adress:"
 							style="font-weight:bold" />
-						<p:inputText id="email" value="#{userSubmissionModelBean.email}"
+						<p:inputText id="email" value="#{userRegisterModelBean.email}"
 							required="true" label="Email">
 							<f:validateRegex
 								pattern="[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}" />
@@ -64,7 +64,7 @@ transitional.dtd">
 
 
 						<h:outputLabel for="login" value="Login" style="font-weight:bold" />
-						<p:inputText id="login" value="#{userSubmissionModelBean.login}"
+						<p:inputText id="login" value="#{userRegisterModelBean.login}"
 							required="true"
 							validatorMessage="Caractere autorisé :[a-z A-Z 0-9 - . _]">
 							<f:validateRegex pattern="[a-zA-Z0-9-._]+" />
@@ -73,19 +73,19 @@ transitional.dtd">
 
 
 						<h:outputLabel for="pwd" value="Password" style="font-weight:bold" />
-						<p:password id="pwd" value="#{userSubmissionModelBean.pwd}"
+						<p:password id="pwd" value="#{userRegisterModelBean.pwd}"
 							match="pwd2" label="Password :" required="true" />
 						<p:message for="pwd" />
 
 						<h:outputLabel for="pwd2" value="Re-Enter Password : "
 							style="font-weight:bold" />
-						<p:password id="pwd2" value="#{userSubmissionModelBean.pwd}"
+						<p:password id="pwd2" value="#{userRegisterModelBean.pwd}"
 							label="pwd2" required="true" />
 						<p:message for="pwd2" />
 					</h:panelGrid>
 
 					<p:commandButton
-						action="#{userControlerBean.checkAndAddUser(userSubmissionModelBean)}"
+						action="#{userControlerBean.checkAndAddUser(userRegisterModelBean)}"
 						value="Submit" update="grid" icon="ui-icon-check"
 						validateClient="true" style="margin-right:10px" />
 

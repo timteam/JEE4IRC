@@ -39,20 +39,20 @@
 								class="btn btn-default" role="button" />
 						</div>
 						<div id="login-form" class="col-md-7">
-							<h:form>
+							<h:form rendered="#{!userControlerBean.isLogged()}">
 								<fieldset class="form-group">
 									<div class="form-group row">
 										<h:outputText value="Username" />
-										<h:inputText id="username" value="#{login.user}"></h:inputText>
+										<h:inputText id="username" value="#{loginBean.login}"></h:inputText>
 										<h:message for="username"></h:message>
 									</div>
 									<div class="form-group row">
 										<h:outputText value="Password" />
-										<h:inputSecret id="password" value="#{login.pwd}"></h:inputSecret>
+										<h:inputSecret id="password" value="#{loginBean.pwd}"></h:inputSecret>
 										<h:message for="password"></h:message>
 									</div>
 									<div class="form-group row">
-										<h:commandButton action="#{login.validateUsernamePassword}"
+										<h:commandButton action="#{userControlerBean.checkUser(loginBean)}"
 											value="Login"></h:commandButton>
 									</div>
 								</fieldset>

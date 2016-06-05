@@ -11,12 +11,13 @@ import javax.faces.context.FacesContext;
 
 import model.LoginBean;
 import model.UserModelBean;
-import model.UserSubmissionModelBean;
+import model.UserRegisterModelBean;
 import dao.fabric.DaoFabric;
 import dao.instance.UserDao;
 
 @ManagedBean
-@ApplicationScoped // Utilisation de application scope afin d'offrir un point d'entrée unique à l'ensemble des clients
+@ApplicationScoped 
+// Utilisation de application scope
 public class UserControlerBean implements Serializable{
 	private UserDao userDao;
 	
@@ -36,24 +37,22 @@ public class UserControlerBean implements Serializable{
 				Map<String, Object> sessionMap 	= 	externalContext.getSessionMap();
 				//place l'utilisateur dans l'espace de mémoire de JSF
 				sessionMap.put("loggedUser", user);
-		        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Successful",  "Connection success") );
+		        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome "+ user.getSurname(),  "Connection success") );
 		        userExist = true;
 			}else{
 				throw new Exception("User not found");
 			}
 		}catch(Exception e){
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hmmm....",  "Connection fail") );
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login failed",  "Connection fail") );
 		}
 		return userExist;
 	}
 
 	
-	public void checkAndAddUser(UserSubmissionModelBean userSubmitted){
+	public void checkAndAddUser(UserRegisterModelBean userSubmitted){
 
 		if(userDao.checkUser(userSubmitted.getLogin(),userSubmitted.getPwd()) != null)
 			this.userDao.addUser(userSubmitted);
-
-		//TODO : redirection en cas d'erreur ?
 	}
 
 	
@@ -87,16 +86,16 @@ public class UserControlerBean implements Serializable{
 
 
 	public void logAdminUser(LoginBean loginBean){
-		UserModelBean userFound = userDao.checkAdminUser(loginBean.getLogin(), loginBean.getPwd());
+		UserModelBean admin = userDao.checkAdminUser(loginBean.getLogin(), loginBean.getPwd());
 		FacesContext context	=	FacesContext.getCurrentInstance();
 
 		ExternalContext externalContext =	context.getExternalContext();
 		Map<String, Object> sessionMap 	= 	externalContext.getSessionMap();
 
-		sessionMap.put("loggedAdminUser", userFound);
-		if( userFound != null)
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Successful",  "Connection success") );
+		sessionMap.put("loggedAdminUser", admin);
+		if( admin != null)
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "You are logged as Admin",  "Connection success") );
 		else
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hmmm....",  "Connection fail") );
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login failed",  "Connection fail") );
 	}
 }
